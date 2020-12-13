@@ -1,1 +1,2 @@
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.18.12+k3s1" sh -s - --bind-address="192.168.1.36" --write-kubeconfig-mode="0644" --tls-san="192.168.1.36"
+#curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.18.12+k3s1" sh -s - --bind-address="192.168.1.36" --write-kubeconfig-mode="0644" --tls-san="192.168.1.36"
+curl -sfL https://get.k3s.io | sh -s - --bind-address="192.168.1.36" --write-kubeconfig-mode="0644" --tls-san="192.168.1.36"

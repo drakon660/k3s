@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazorkubernetes-deployment
+  labels:
+    app: blazorkubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blazorkubernetes
+  template:
+    metadata:
+      labels:
+        app: blazorkubernetes
+    spec:
+      containers:
+      - name: blazorkubernetes
+        image: drakon660/kubernetes:blazorkubernetes1
+        ports:
+        - containerPort: 80
+        - containerPort: 443            
+        terminationMessagePath: "/tmp/my-log"  
+        volumeMounts:
+        - name: appsettings
+          mountPath: /app/appsettings
+          readOnly: true
+      - name: db
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+         - name: "POSTGRES_USER"
+           value: "drakon"
+         - name: "POSTGRES_DB"
+           value: "sample"
+         - name: "POSTGRES_PASSWORD"
+           value: "dupa"      
+      volumes:
+         - name: appsettings
+           secret:
+            secretName: secret-appsettings
