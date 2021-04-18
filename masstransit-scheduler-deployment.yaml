@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  labels:
+    app: masstransit-scheduler
+  name: masstransit-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: masstransit-scheduler  
+  template:
+    metadata:
+      labels:
+        app: masstransit-scheduler
+    spec:
+      containers:
+        - image: masstransit/sqlserver-quartz          
+          name: masstransit-sqlserver
+          ports:
+            - containerPort: 1433            
+          resources: {}
+        - image: masstransit/quartz          
+          name: masstransit-quartz
+          ports:
+            - containerPort: 80            
+          env:
+            - name: MT_Quartz__ConnectionString
+              value: Server=localhost;Database=quartznet;Persist Security Info=False;User ID=sa;Password=Quartz!DockerP4ss;Encrypt=False;TrustServerCertificate=True;
+          resources: {}
+      restartPolicy: Always
+status: {}

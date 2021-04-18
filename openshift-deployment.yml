@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openshiftapp-deployment
+  labels:
+    app: openshiftapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openshiftapp
+  template:
+    metadata:
+      labels:
+        app: openshiftapp
+    spec:
+      containers:
+      - name: openshiftappv1
+        image:  drakon660/kubernetes:openshiftappv1
+        ports:
+        - containerPort: 5000
+        - containerPort: 5001

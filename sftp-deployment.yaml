@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: sftp
+  name: sftp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sftp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: sftp
+    spec:
+      containers:
+        - args:
+            - foo:pass:1001
+          image: atmoz/sftp
+          name: sftp
+          ports:
+            - containerPort: 22
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/foo/upload
+              name: sftp-claim
+      restartPolicy: Always
+      volumes:
+        - name: sftp-claim
+          persistentVolumeClaim:
+            claimName: local-claim
+status: {}

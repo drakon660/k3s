@@ -1,0 +1,172 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"warehouse"},"name":"warehouse","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"warehouse"}},"template":{"metadata":{"labels":{"app":"warehouse"}},"spec":{"containers":[{"env":[{"name":"MT_Scheduler","value":"masstransit-scheduler"},{"name":"MT_RMQ__HOST","value":"masstransit-rabbitmq-service"},{"name":"CUSTOMCONNSTR_MongoConnectionString","value":"mongodb+srv://893Vy5Ga2i1XGHcl:893Vy5Ga2i1XGHcl@drakon.hzaee.mongodb.net/retryWrites=true\u0026w=majority"}],"image":"drakon660/kubernetes:warehouse","name":"warehouse","ports":[{"containerPort":80}],"resources":{}}],"restartPolicy":"Always"}}},"status":{}}
+  creationTimestamp: "2021-02-26T20:51:58Z"
+  generation: 1
+  labels:
+    app: warehouse
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:progressDeadlineSeconds: {}
+        f:replicas: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:strategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+          f:type: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              .: {}
+              f:app: {}
+          f:spec:
+            f:containers:
+              k:{"name":"warehouse"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"CUSTOMCONNSTR_MongoConnectionString"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MT_RMQ__HOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MT_Scheduler"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":80,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-02-26T20:51:58Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:updatedReplicas: {}
+    manager: k3s
+    operation: Update
+    time: "2021-03-03T11:53:02Z"
+  name: warehouse
+  namespace: default
+  resourceVersion: "57542"
+  uid: 74dbd55a-dc64-4b5d-93bb-62d712e215c9
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: warehouse
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: warehouse
+    spec:
+      containers:
+      - env:
+        - name: MT_Scheduler
+          value: masstransit-scheduler
+        - name: MT_RMQ__HOST
+          value: masstransit-rabbitmq-service
+        - name: CUSTOMCONNSTR_MongoConnectionString
+          value: mongodb+srv://893Vy5Ga2i1XGHcl:893Vy5Ga2i1XGHcl@drakon.hzaee.mongodb.net/retryWrites=true&w=majority
+        image: drakon660/kubernetes:warehouse
+        imagePullPolicy: IfNotPresent
+        name: warehouse
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-02-26T20:51:58Z"
+    lastUpdateTime: "2021-02-26T20:52:03Z"
+    message: ReplicaSet "warehouse-77b96dfbcb" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2021-03-03T11:53:02Z"
+    lastUpdateTime: "2021-03-03T11:53:02Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

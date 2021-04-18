@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  labels:
+    app: masstransit-rabbitmq
+  name: masstransit-rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: masstransit-rabbitmq
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: masstransit-rabbitmq 
+    spec:
+      containers:
+        - image: masstransit/rabbitmq:latest
+          livenessProbe:
+            exec:
+              command:
+                - rabbitmqctl
+                - status
+            failureThreshold: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c" ,"rabbitmqadmin list queues name | awk '{print $2}' | xargs -I qn rabbitmqadmin delete queue name=qn"]                  
+          name: masstransit-rabbitmq
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+            - containerPort: 15692
+          resources: {}
+      restartPolicy: Always
+status: {}
