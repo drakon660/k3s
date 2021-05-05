@@ -25,8 +25,8 @@ spec:
         io.kompose.service: sftp
     spec:
       containers:
-        - args:
-            - foo:pass:1001
+        - command: ["./entrypoint"]
+          args: ["foo:pass:::upload"]
           image: atmoz/sftp
           name: sftp
           ports:
