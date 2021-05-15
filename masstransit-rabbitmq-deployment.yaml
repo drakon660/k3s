@@ -37,3 +37,22 @@ spec:
           resources: {}
       restartPolicy: Always
 status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: masstransit-rabbitmq-service
+ labels:
+  app: masstransit-rabbitmq-service
+spec:
+ type: NodePort
+ ports:
+  - port: 15672  
+    nodePort: 30007
+    name: "15672"
+  - port: 5672  
+    nodePort: 30010
+    name: "5672"
+ selector:
+  app: masstransit-rabbitmq

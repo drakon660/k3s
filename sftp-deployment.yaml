@@ -6,23 +6,19 @@ metadata:
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
   labels:
-    io.kompose.service: sftp
-  name: sftp
+    app: sftp-deployment
+  name: sftp-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: sftp
+      app: sftp
   strategy:
     type: Recreate
   template:
-    metadata:
-      annotations:
-        kompose.cmd: kompose convert -f docker-compose.yaml
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
+    metadata:      
       labels:
-        io.kompose.service: sftp
+        app: sftp
     spec:
       containers:
         - command: ["./entrypoint"]
@@ -41,3 +37,20 @@ spec:
           persistentVolumeClaim:
             claimName: local-claim
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:  
+  labels:
+    app: sftp-service
+  name: sftp-service
+spec:
+  type: NodePort
+  ports:
+    - name: "30220"
+      port: 22      
+      nodePort: 30220
+  selector:
+    app: sftp
+status:
+  loadBalancer: {}

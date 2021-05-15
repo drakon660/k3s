@@ -27,6 +27,24 @@ spec:
           env:
             - name: MT_Quartz__ConnectionString
               value: Server=localhost;Database=quartznet;Persist Security Info=False;User ID=sa;Password=Quartz!DockerP4ss;Encrypt=False;TrustServerCertificate=True;
+            - name: MT_RMQ__HOST
+              value: "masstransit-rabbitmq-service.home"
           resources: {}
       restartPolicy: Always
 status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: masstransit-sqlserver-service
+ labels:
+  app: masstransit-sqlserver-service
+spec:
+ type: NodePort
+ ports:
+  - port: 1433  
+    nodePort: 31433
+    name: "1433"  
+ selector:
+  app: masstransit-scheduler
