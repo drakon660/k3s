@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-arm
+spec:
+  selector:
+    matchLabels:
+      app: microservice-arm
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: microservice-arm
+    spec:
+      containers:
+      - name: microservice-arm
+        image: cloud.canister.io:5000/drakon/microservice-arm
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+      imagePullSecrets:
+        - name: canister
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: microservice-arm
+ labels:
+  app: microservice-arm
+spec:
+ type: NodePort
+ ports:   
+  - port: 80
+    nodePort: 30099
+    name: "80"
+  - port: 443
+    nodePort: 30089
+    name: "443"
+ selector:
+  app: microservice-arm
