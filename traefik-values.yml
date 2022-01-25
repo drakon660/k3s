@@ -74,9 +74,9 @@ ingressRoute:
 # Persistent Storage
 persistence:
   enabled: true
-  name: ssl-certs
+  name: data
   size: 1Gi
-  path: /ssl-certs
+  path: /data
 
 deployment:
   initContainers:
@@ -84,10 +84,10 @@ deployment:
     # Related issue: https://github.com/containous/traefik/issues/6972
     - name: volume-permissions
       image: busybox:1.31.1
-      command: ["sh", "-c", "chmod -Rv 600 /ssl-certs/*"]
+      command: ["sh", "-c", "chmod -Rv 600 /data/*"]
       volumeMounts:
-        - name: ssl-certs
-          mountPath: /ssl-certs
+        - name: data
+          mountPath: /data
 
 # Set Traefik as your default Ingress Controller, according to Kubernetes 1.19+ changes.
 ingressClass:
