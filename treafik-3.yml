@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    expose:
+      - 8080
+    command:
+      - --api=true
+      - --api.dashboard=true
+      - --providers.docker.endpoint=unix:///var/run/docker.sock
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.console.address=:8080
+      - --certificatesresolvers.letsencrypt.acme.email=drakon660@email.com  # replace with your email
+      - --certificatesresolvers.letsencrypt.acme.storage=acme/acme.json
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --entryPoints.web.http.redirections.entryPoint.to=websecure
+      - --entryPoints.web.http.redirections.entryPoint.scheme=https
+      - --entryPoints.web.http.redirections.entrypoint.permanent=true
+      # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --log.level=DEBUG
+      - --log.filePath=/logs/traefik.log
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./volumes/traefik/acme:/acme
+      - ./volumes/traefik/logs:/logs
+    labels:
+            # traefik.enable=true
+            #     - traefik.http.routers.thisproxylocal.rule=Host(`144.21.34.230`) # Change 192.168.100.120 to your Docker server IP.
+            #      - traefik.http.routers.thisproxylocal.entryPoints=console,websecure
+            #      - traefik.http.routers.thisproxylocal.service=api@internal
+            #      - traefik.frontend.rule="Host:scrooge.cloud"
+     - traefik.enable=true
+     - traefik.http.routers.traefik_https.rule=Host(`host.docker.internal`)
+     - traefik.http.routers.traefik_https.entrypoint=websecure
+     - traefik.http.routers.traefik_https.tls=true
+     - traefik.http.routers.traefik_https.tls.certResolver=myresolver
+     - traefik.http.routers.traefik_https.service=api@internal
+     - traefik.http.routers.dashboard.rule=PathPrefix(`/api`, `/dashboard`)
+     - traefik.http.routers.dashboard.service=api@internal"
+    restart: unless-stopped
+
+
+  # whoami:
+  #   image: "traefik/whoami"
+  #   container_name: "simple-service"
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.whoami.rule=Host(`host.docker.internal`) || Path(`/gf`)  # replace gf.cloudwatch.net with your domain name, leave /gf unchanged for now
+  #     - traefik.http.routers.whoami.entrypoints=websecure
+  #     - traefik.http.routers.whoami.tls.certresolver=letsencrypt
+  #   restart: unless-stopped
+
+  tui-web:
+    image: "tui-web:1.3"
+    container_name: "tui-web"
+    ports:
+      - 8081:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.tui-web.rule=Host(`host.docker.internal`) && Path(`/tui-web`)  # replace gf.cloudwatch.net with your domain name, leave /gf unchanged for now
+      - traefik.http.routers.tui-web.entrypoints=websecure
+      - traefik.http.routers.tui-web.tls.certresolver=letsencrypt
+    restart: unless-stopped

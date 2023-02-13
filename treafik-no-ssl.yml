@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  reverse-proxy:
+    image: traefik:latest
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80" #tell traefik to listen for connections on port 80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=false 
+
+  showcase:
+    restart: always
+    image: tui-web:1.4
+    container_name: tui-web
+    ports:
+      - 8081:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8081
+    labels:
+     - traefik.enable=true
+     - traefik.http.routers.showcase.rule=Host(`tui.localhost`)
+     - traefik.http.routers.showcase.entrypoints=web 
+     - traefik.http.services.showcase.loadbalancer.server.port=8081   
+    restart: unless-stopped

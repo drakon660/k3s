@@ -64,7 +64,7 @@ metadata:
     # traefik.ingress.kubernetes.io/router.middlewares:your-middleware@kubernetescrd
 spec:
   rules:
-  - host: "nginx.scrooge-k3s.cf"  # Your hostname
+  - host: "scrooge.cloud/nginx"  # Your hostname
     http:
       paths:
       # Path-based routing settings:

@@ -48,7 +48,6 @@ ports:
       # (optional) Set a Default CertResolver
       certResolver: cloudflare
   
-
 env:
 # Set your environment variables here...
 # 
@@ -76,7 +75,7 @@ persistence:
   enabled: true
   name: data
   size: 1Gi
-  path: /data
+  path: /data 
 
 deployment:
   initContainers:

@@ -1,0 +1,923 @@
+time="2023-02-13T07:08:13Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:08:13Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:08:13Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:08:13Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:08:13Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:08:13Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:08:13Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:08:13Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:08:13Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:08:13Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:08:13Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:08:13Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:08:13Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:08:13Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:08:13Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:08:13Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:08:13Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:08:13Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:08:13Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:08:13Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:08:13Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-9e228a58c9bc26c67d54f354aff588fc452145263a090ad75b6be8996372e823
+time="2023-02-13T07:08:13Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:08:13Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:08:13Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:08:13Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:08:13Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:08:13Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:08:13Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:08:13Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:08:13Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:08:13Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:08:13Z" level=debug msg="Setting up redirection to https 443" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:08:13Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:08:13Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:08:27Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:27Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49180: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:27Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:27Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49188: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:30Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:30Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49190: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:30Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:30Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49202: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:30Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:40Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:40Z" level=debug msg="http: TLS handshake error from 172.19.0.1:37160: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:40Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:40Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:08:40Z" level=debug msg="http: TLS handshake error from 172.19.0.1:37164: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:40Z" level=debug msg="http: TLS handshake error from 172.19.0.1:37180: remote error: tls: unknown certificate"
+time="2023-02-13T07:08:40Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:14Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:14Z" level=debug msg="http: TLS handshake error from 172.19.0.1:43702: remote error: tls: unknown certificate"
+time="2023-02-13T07:09:14Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:14Z" level=debug msg="http: TLS handshake error from 172.19.0.1:43712: remote error: tls: unknown certificate"
+time="2023-02-13T07:09:14Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:22Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:22Z" level=debug msg="http: TLS handshake error from 172.19.0.1:59958: remote error: tls: unknown certificate"
+time="2023-02-13T07:09:22Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:46Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:46Z" level=debug msg="http: TLS handshake error from 172.19.0.1:40514: remote error: tls: unknown certificate"
+time="2023-02-13T07:09:46Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:09:46Z" level=debug msg="http: TLS handshake error from 172.19.0.1:40516: remote error: tls: unknown certificate"
+time="2023-02-13T07:09:46Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:10:13Z" level=info msg="I have to go..."
+time="2023-02-13T07:10:13Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:10:13Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:10:13Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:10:13Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:10:13Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:10:13Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:10:13Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:10:13Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:10:13Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:10:13Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:10:13Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:10:14Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:10:14Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:10:14Z" level=info msg="Server stopped"
+time="2023-02-13T07:10:14Z" level=info msg="Shutting down"
+time="2023-02-13T07:11:40Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:11:40Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:11:40Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:11:40Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:11:40Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:11:40Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:11:40Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:11:40Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:11:40Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:11:40Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:11:40Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:11:40Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:11:40Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:11:40Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:11:40Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:11:40Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:11:40Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:11:40Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:11:40Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:11:40Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:11:40Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-961d5b468abe843cdbfec6dcd8fa69bf54d262a0edbfe4b863fb6723053ddda5
+time="2023-02-13T07:11:40Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:11:40Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:11:40Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:11:40Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:11:40Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:11:40Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:11:40Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:11:40Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:11:40Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing
+time="2023-02-13T07:11:40Z" level=debug msg="Creating middleware" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:11:40Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:11:40Z" level=debug msg="Adding tracing to middleware" entryPointName=web middlewareName=redirect-web-to-websecure@internal routerName=web-to-websecure@internal
+time="2023-02-13T07:11:40Z" level=debug msg="Creating middleware" middlewareType=Recovery middlewareName=traefik-internal-recovery entryPointName=web
+time="2023-02-13T07:11:47Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:11:47Z" level=debug msg="http: TLS handshake error from 172.19.0.1:50776: remote error: tls: unknown certificate"
+time="2023-02-13T07:11:47Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:11:47Z" level=debug msg="http: TLS handshake error from 172.19.0.1:50782: remote error: tls: unknown certificate"
+time="2023-02-13T07:11:49Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:11:49Z" level=debug msg="http: TLS handshake error from 172.19.0.1:50784: remote error: tls: unknown certificate"
+time="2023-02-13T07:11:49Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:11:49Z" level=debug msg="http: TLS handshake error from 172.19.0.1:50794: remote error: tls: unknown certificate"
+time="2023-02-13T07:11:49Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:12:01Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:12:01Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51754: remote error: tls: unknown certificate"
+time="2023-02-13T07:12:01Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:12:01Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51766: remote error: tls: unknown certificate"
+time="2023-02-13T07:12:01Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:13:18Z" level=info msg="I have to go..."
+time="2023-02-13T07:13:18Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:13:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:13:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:13:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:13:18Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:13:18Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:13:18Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:13:18Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:13:18Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:13:18Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:13:18Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:13:18Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:13:18Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:13:18Z" level=info msg="Server stopped"
+time="2023-02-13T07:13:18Z" level=info msg="Shutting down"
+time="2023-02-13T07:13:20Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:13:20Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:13:20Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:13:20Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:13:20Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:13:20Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:13:20Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:13:20Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:13:20Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:13:20Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:13:20Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:13:20Z" level=info msg="Testing certificate renew..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:13:20Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:13:20Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:13:20Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:13:20Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:13:20Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:13:20Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:13:20Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:13:20Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:13:20Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-612df285b48b1b88958cb09c979c014fb5dd7b42cac35cb335837a5bae2dbb88
+time="2023-02-13T07:13:20Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:13:20Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:13:20Z" level=debug msg="Added outgoing tracing middleware noop@internal" routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder entryPointName=web
+time="2023-02-13T07:13:20Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=web
+time="2023-02-13T07:13:20Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:13:20Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:13:20Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:13:20Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:13:34Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:13:34Z" level=debug msg="http: TLS handshake error from 172.19.0.1:55918: remote error: tls: unknown certificate"
+time="2023-02-13T07:13:36Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:13:36Z" level=debug msg="http: TLS handshake error from 172.19.0.1:55924: remote error: tls: unknown certificate"
+time="2023-02-13T07:13:36Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:13:36Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:13:36Z" level=debug msg="http: TLS handshake error from 172.19.0.1:55926: remote error: tls: unknown certificate"
+time="2023-02-13T07:13:36Z" level=debug msg="http: TLS handshake error from 172.19.0.1:55928: remote error: tls: unknown certificate"
+time="2023-02-13T07:13:36Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:14:35Z" level=info msg="I have to go..."
+time="2023-02-13T07:14:35Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:14:35Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:14:35Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:14:35Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:14:35Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:14:35Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:14:35Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:14:35Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:14:35Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:14:35Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:14:35Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:14:35Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:14:45Z" level=debug msg="Server failed to shutdown before deadline because: context deadline exceeded" entryPointName=web
+time="2023-02-13T07:14:45Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:14:45Z" level=info msg="Server stopped"
+time="2023-02-13T07:14:45Z" level=info msg="Shutting down"
+time="2023-02-13T07:14:55Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:14:55Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:14:55Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:14:55Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:14:55Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:14:55Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:14:55Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:14:55Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:14:55Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:14:55Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:14:55Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:14:55Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:14:55Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:14:55Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:14:55Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:14:55Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:14:55Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:14:55Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:14:55Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:14:55Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:14:55Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-3a9caa2c2a66a698a3f0ea01cf0ea123028e9714e0614065eacf84c945958b02
+time="2023-02-13T07:14:55Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:14:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:14:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing entryPointName=web routerName=web-to-websecure@internal middlewareType=TracingForwarder
+time="2023-02-13T07:14:56Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:14:56Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:14:56Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:14:56Z" level=debug msg="Creating middleware" entryPointName=web middlewareType=Recovery middlewareName=traefik-internal-recovery
+time="2023-02-13T07:14:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:14:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:14:56Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:14:56Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:14:56Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:14:56Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:14:58Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:14:58Z" level=debug msg="http: TLS handshake error from 172.19.0.1:36630: remote error: tls: unknown certificate"
+time="2023-02-13T07:14:58Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:14:58Z" level=debug msg="http: TLS handshake error from 172.19.0.1:36640: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:04Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:15:04Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51372: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:04Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:15:04Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51382: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:04Z" level=debug msg="Serving default certificate for request: \"\""
+time="2023-02-13T07:15:11Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:11Z" level=debug msg="http: TLS handshake error from 172.19.0.1:58886: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:11Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:11Z" level=debug msg="http: TLS handshake error from 172.19.0.1:58898: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:16Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:16Z" level=debug msg="http: TLS handshake error from 172.19.0.1:58902: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:16Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:16Z" level=debug msg="http: TLS handshake error from 172.19.0.1:58918: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:16Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:22Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:22Z" level=debug msg="http: TLS handshake error from 172.19.0.1:37194: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:22Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:15:22Z" level=debug msg="http: TLS handshake error from 172.19.0.1:37196: remote error: tls: unknown certificate"
+time="2023-02-13T07:15:22Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:17:41Z" level=info msg="I have to go..."
+time="2023-02-13T07:17:41Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:17:41Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:17:41Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:17:41Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:17:41Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:17:41Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:17:41Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:17:41Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:17:41Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:17:41Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:17:41Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:17:41Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:17:42Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:17:42Z" level=info msg="Server stopped"
+time="2023-02-13T07:17:42Z" level=info msg="Shutting down"
+time="2023-02-13T07:17:56Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:17:56Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:17:56Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:17:56Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:17:56Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:17:56Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:17:56Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:17:56Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:17:56Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:17:56Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:17:56Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:17:56Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:17:56Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:17:56Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:17:56Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:17:56Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:17:56Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:17:56Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:17:56Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:17:56Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:17:56Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:17:56Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:17:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:17:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder entryPointName=web
+time="2023-02-13T07:17:56Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:17:56Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:17:56Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:17:56Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:17:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:17:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareType=TracingForwarder middlewareName=tracing entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:17:56Z" level=debug msg="Creating middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:17:56Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:17:56Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:17:56Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:18:02Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:02Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53670: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:02Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:02Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:02Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53676: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:02Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53672: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:05Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:05Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53692: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:05Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:05Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:18:05Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53694: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:05Z" level=debug msg="http: TLS handshake error from 172.19.0.1:53708: remote error: tls: unknown certificate"
+time="2023-02-13T07:18:05Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:20:23Z" level=info msg="I have to go..."
+time="2023-02-13T07:20:23Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:20:23Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:20:23Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:20:23Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:20:23Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:20:23Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:20:23Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:20:23Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:20:23Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:20:23Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:20:23Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:20:23Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:20:24Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:20:24Z" level=info msg="Server stopped"
+time="2023-02-13T07:20:24Z" level=info msg="Shutting down"
+time="2023-02-13T07:20:57Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:20:57Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:20:57Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:20:57Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:20:57Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:20:57Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:20:57Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:20:57Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:20:57Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:20:57Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:20:57Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:20:57Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:20:57Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:20:57Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:20:57Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:20:57Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:20:57Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:20:57Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:20:57Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:20:57Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:20:57Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:20:57Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"whoami\":{\"entryPoints\":[\"websecure\"],\"service\":\"whoami-k3s\",\"rule\":\"Host(`host.docker.internal`) || Path(`/gf`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"whoami-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:20:57Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:20:57Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:20:57Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:20:57Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:20:57Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:20:57Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:20:58Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:20:58Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareType=TracingForwarder routerName=web-to-websecure@internal entryPointName=web middlewareName=tracing
+time="2023-02-13T07:20:58Z" level=debug msg="Creating middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:20:58Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal middlewareType=RedirectScheme middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:20:58Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:20:58Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:20:58Z" level=debug msg="Creating middleware" routerName=whoami@docker entryPointName=websecure middlewareName=pipelining middlewareType=Pipelining serviceName=whoami-k3s
+time="2023-02-13T07:20:58Z" level=debug msg="Creating load-balancer" serviceName=whoami-k3s routerName=whoami@docker entryPointName=websecure
+time="2023-02-13T07:20:58Z" level=debug msg="Creating server 0 http://172.19.0.2:80" entryPointName=websecure serviceName=whoami-k3s serverName=0 routerName=whoami@docker
+time="2023-02-13T07:20:58Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:20:58Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:20:58Z" level=debug msg="Added outgoing tracing middleware whoami-k3s" middlewareType=TracingForwarder entryPointName=websecure routerName=whoami@docker middlewareName=tracing
+time="2023-02-13T07:20:58Z" level=debug msg="Creating middleware" entryPointName=websecure middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:20:58Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:20:58Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" routerName=whoami@docker rule="Host(`host.docker.internal`) || Path(`/gf`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:20:58Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." routerName=whoami@docker rule="Host(`host.docker.internal`) || Path(`/gf`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:20:58Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=whoami@docker rule="Host(`host.docker.internal`) || Path(`/gf`)"
+time="2023-02-13T07:20:58Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." providerName=letsencrypt.acme routerName=whoami@docker rule="Host(`host.docker.internal`) || Path(`/gf`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:20:59Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:20:59Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:20:59Z" level=info msg=Register... providerName=letsencrypt.acme
+time="2023-02-13T07:20:59Z" level=debug msg="legolog: [INFO] acme: Registering account for drakon660@email.com"
+time="2023-02-13T07:21:00Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:21:00Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:21:00Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" routerName=whoami@docker rule="Host(`host.docker.internal`) || Path(`/gf`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:21:01Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:21:01Z" level=debug msg="http: TLS handshake error from 172.19.0.1:52536: remote error: tls: unknown certificate"
+time="2023-02-13T07:21:01Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:21:01Z" level=debug msg="http: TLS handshake error from 172.19.0.1:52546: remote error: tls: unknown certificate"
+time="2023-02-13T07:21:03Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:21:03Z" level=debug msg="http: TLS handshake error from 172.19.0.1:52492: remote error: tls: unknown certificate"
+time="2023-02-13T07:21:03Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:21:03Z" level=debug msg="http: TLS handshake error from 172.19.0.1:52504: remote error: tls: unknown certificate"
+time="2023-02-13T07:21:03Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:24:33Z" level=info msg="I have to go..."
+time="2023-02-13T07:24:33Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:24:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:24:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:24:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:24:33Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:24:33Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:24:33Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:24:33Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:24:33Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:24:33Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:24:33Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:24:33Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:24:33Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:24:33Z" level=info msg="Server stopped"
+time="2023-02-13T07:24:33Z" level=info msg="Shutting down"
+time="2023-02-13T07:24:36Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:24:36Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:24:36Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:24:36Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:24:36Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:24:36Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:24:36Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:24:36Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:24:36Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:24:36Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:24:36Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:24:36Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:24:36Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:24:36Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:24:36Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:24:36Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:24:36Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:24:36Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:24:36Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:24:36Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:24:36Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:24:36Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:24:37Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:24:37Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:24:37Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:24:37Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=web
+time="2023-02-13T07:24:37Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:24:37Z" level=debug msg="Added outgoing tracing middleware noop@internal" routerName=web-to-websecure@internal middlewareType=TracingForwarder middlewareName=tracing entryPointName=web
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:24:37Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:24:37Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=web
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s middlewareName=pipelining middlewareType=Pipelining
+time="2023-02-13T07:24:37Z" level=debug msg="Creating load-balancer" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s
+time="2023-02-13T07:24:37Z" level=debug msg="Creating server 0 http://172.19.0.2:80" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s serverName=0
+time="2023-02-13T07:24:37Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:24:37Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:24:37Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" entryPointName=websecure routerName=tui-web@docker middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:24:37Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=websecure middlewareName=traefik-internal-recovery
+time="2023-02-13T07:24:37Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:24:37Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:24:37Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:24:37Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:24:37Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:24:37Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:24:37Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:24:37Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:24:37Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:24:38Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:24:41Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:24:41Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49262: remote error: tls: unknown certificate"
+time="2023-02-13T07:24:41Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:24:41Z" level=debug msg="http: TLS handshake error from 172.19.0.1:49276: remote error: tls: unknown certificate"
+time="2023-02-13T07:24:44Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:24:44Z" level=debug msg="http: TLS handshake error from 172.19.0.1:39006: remote error: tls: unknown certificate"
+time="2023-02-13T07:24:44Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:24:44Z" level=debug msg="http: TLS handshake error from 172.19.0.1:39016: remote error: tls: unknown certificate"
+time="2023-02-13T07:24:44Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:25:09Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:25:09Z" level=debug msg="http: TLS handshake error from 172.19.0.1:35408: remote error: tls: unknown certificate"
+time="2023-02-13T07:25:09Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:25:09Z" level=debug msg="http: TLS handshake error from 172.19.0.1:35424: remote error: tls: unknown certificate"
+time="2023-02-13T07:25:09Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:25:09Z" level=debug msg="http: TLS handshake error from 172.19.0.1:35434: remote error: tls: unknown certificate"
+time="2023-02-13T07:25:14Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:25:14Z" level=debug msg="http: TLS handshake error from 172.19.0.1:59480: remote error: tls: unknown certificate"
+time="2023-02-13T07:25:14Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:25:14Z" level=debug msg="http: TLS handshake error from 172.19.0.1:59492: remote error: tls: unknown certificate"
+time="2023-02-13T07:25:14Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:11Z" level=info msg="I have to go..."
+time="2023-02-13T07:27:11Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:27:11Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:27:11Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:27:11Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:27:11Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:27:11Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:27:11Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:27:11Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:27:11Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:27:11Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:27:11Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:27:11Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:27:11Z" level=debug msg="Provider event received {Status:die ID:5e1df351b50d7e7a0cefb9da0d2e7c6c685b1722fd0a67a0ddfcf6f74db216a0 From:tui-web:1.1 Type:container Action:die Actor:{ID:5e1df351b50d7e7a0cefb9da0d2e7c6c685b1722fd0a67a0ddfcf6f74db216a0 Attributes:map[com.docker.compose.config-hash:11a2e4e386f043a8c0081cf325784e91443fad5374f821e92ea4c30f396f5a24 com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 exitCode:0 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273231 TimeNano:1676273231467826383}" providerName=docker
+time="2023-02-13T07:27:11Z" level=error msg="field not found, node: entrypoint" container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400 providerName=docker
+time="2023-02-13T07:27:11Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:27:11Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:27:11Z" level=info msg="Server stopped"
+time="2023-02-13T07:27:11Z" level=info msg="Shutting down"
+time="2023-02-13T07:27:12Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:12Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:27:12Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme routerName=web-to-websecure@internal
+time="2023-02-13T07:27:12Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:27:12Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:12Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:27:24Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:27:24Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:27:24Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:27:24Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:27:24Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:27:24Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:27:24Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:27:24Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:27:24Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:27:24Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:27:24Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=info msg="Testing certificate renew..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:27:24Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:27:24Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:27:24Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:27:24Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:27:24Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:27:24Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:27:24Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:27:24Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:27:24Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:27:24Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:24Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing entryPointName=web routerName=web-to-websecure@internal middlewareType=TracingForwarder
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:27:24Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:27:24Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:27:24Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:24Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:24Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:27:24Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-web-to-websecure@internal entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=web middlewareName=traefik-internal-recovery
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" routerName=tui-web@docker entryPointName=websecure serviceName=tui-web-k3s middlewareName=pipelining middlewareType=Pipelining
+time="2023-02-13T07:27:24Z" level=debug msg="Creating load-balancer" entryPointName=websecure serviceName=tui-web-k3s routerName=tui-web@docker
+time="2023-02-13T07:27:24Z" level=debug msg="Creating server 0 http://172.19.0.2:80" serviceName=tui-web-k3s routerName=tui-web@docker serverName=0 entryPointName=websecure
+time="2023-02-13T07:27:24Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:27:24Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:27:24Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" entryPointName=websecure middlewareName=tracing middlewareType=TracingForwarder routerName=tui-web@docker
+time="2023-02-13T07:27:24Z" level=debug msg="Creating middleware" entryPointName=websecure middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:27:24Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:27:24Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:24Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:24Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:27:24Z" level=debug msg="Provider event received {Status:die ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:die Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 exitCode:139 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273244 TimeNano:1676273244808560805}" providerName=docker
+time="2023-02-13T07:27:25Z" level=error msg="service \"tui-web-k3s\" error: unable to find the IP address for the container \"/tui-web\": the server is ignored" container=tui-web-k3s-a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 providerName=docker
+time="2023-02-13T07:27:25Z" level=error msg="field not found, node: entrypoint" container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400 providerName=docker
+time="2023-02-13T07:27:25Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:27:25Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:27:25Z" level=debug msg="Provider event received {Status:start ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:start Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273245 TimeNano:1676273245531302666}" providerName=docker
+time="2023-02-13T07:27:25Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:27:25Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:26Z" level=debug msg="Provider event received {Status:die ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:die Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 exitCode:139 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273246 TimeNano:1676273246007649359}" providerName=docker
+time="2023-02-13T07:27:26Z" level=error msg="service \"tui-web-k3s\" error: unable to find the IP address for the container \"/tui-web\": the server is ignored" providerName=docker container=tui-web-k3s-a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229
+time="2023-02-13T07:27:26Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:27:26Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:27:26Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:26Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:27:26Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:26Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:27:26Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:27:26Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:27:26Z" level=debug msg="Provider event received {Status:start ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:start Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273246 TimeNano:1676273246740346617}" providerName=docker
+time="2023-02-13T07:27:26Z" level=error msg="field not found, node: entrypoint" container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400 providerName=docker
+time="2023-02-13T07:27:27Z" level=debug msg="Provider event received {Status:die ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:die Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 exitCode:139 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273247 TimeNano:1676273247287579602}" providerName=docker
+time="2023-02-13T07:27:27Z" level=error msg="service \"tui-web-k3s\" error: unable to find the IP address for the container \"/tui-web\": the server is ignored" providerName=docker container=tui-web-k3s-a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229
+time="2023-02-13T07:27:27Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:27:28Z" level=debug msg="Provider event received {Status:start ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:start Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273248 TimeNano:1676273248139114296}" providerName=docker
+time="2023-02-13T07:27:28Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:27:28Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:27:28Z" level=debug msg="Provider event received {Status:die ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 From:tui-web:1.1 Type:container Action:die Actor:{ID:a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229 Attributes:map[com.docker.compose.config-hash:67b927c6157332d6a25ae80d75a04e870fbcd0b335ad9734408ee95144b9c78a com.docker.compose.container-number:1 com.docker.compose.depends_on: com.docker.compose.image:sha256:e2def61cf4f80a821330f006c34d8fbf50d61a96264b109debad7c31d09346d6 com.docker.compose.oneoff:False com.docker.compose.project:k3s com.docker.compose.project.config_files:D:\\GitHub\\k3s\\treafik-3.yml com.docker.compose.project.working_dir:D:\\GitHub\\k3s com.docker.compose.service:tui-web com.docker.compose.version:2.15.1 exitCode:139 image:tui-web:1.1 name:tui-web traefik.enable:true traefik.http.routers.tui-web.entrypoints:websecure traefik.http.routers.tui-web.rule:Host(`host.docker.internal`) && Path(`/tui-web`) traefik.http.routers.tui-web.tls.certresolver:letsencrypt]} Scope:local Time:1676273248 TimeNano:1676273248618065172}" providerName=docker
+time="2023-02-13T07:27:28Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:28Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web middlewareName=tracing middlewareType=TracingForwarder routerName=web-to-websecure@internal
+time="2023-02-13T07:27:28Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:27:28Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:28Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:28Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:27:28Z" level=debug msg="Creating middleware" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s middlewareName=pipelining middlewareType=Pipelining
+time="2023-02-13T07:27:28Z" level=debug msg="Creating load-balancer" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s
+time="2023-02-13T07:27:28Z" level=debug msg="Creating server 0 http://172.19.0.2:80" routerName=tui-web@docker serviceName=tui-web-k3s serverName=0 entryPointName=websecure
+time="2023-02-13T07:27:28Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:27:28Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:27:28Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" routerName=tui-web@docker middlewareName=tracing middlewareType=TracingForwarder entryPointName=websecure
+time="2023-02-13T07:27:28Z" level=debug msg="Creating middleware" entryPointName=websecure middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:27:28Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:27:28Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker
+time="2023-02-13T07:27:28Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." providerName=letsencrypt.acme routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:27:28Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:28Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:28Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:27:28Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker
+time="2023-02-13T07:27:28Z" level=error msg="service \"tui-web-k3s\" error: unable to find the IP address for the container \"/tui-web\": the server is ignored" providerName=docker container=tui-web-k3s-a2bdb870efc3923f8167517c276a41025550ae5b42bf164d66b72b0355c28229
+time="2023-02-13T07:27:28Z" level=error msg="field not found, node: entrypoint" container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400 providerName=docker
+time="2023-02-13T07:27:29Z" level=info msg="I have to go..."
+time="2023-02-13T07:27:29Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:27:29Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:27:29Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:27:29Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:27:29Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:27:29Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:27:29Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:27:29Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:27:29Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:27:29Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:27:29Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:27:29Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:27:29Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:27:29Z" level=info msg="Server stopped"
+time="2023-02-13T07:27:29Z" level=info msg="Shutting down"
+time="2023-02-13T07:27:46Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:27:46Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:27:46Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:27:46Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:27:46Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:27:46Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:27:46Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:27:46Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:27:46Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:27:46Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:27:46Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:27:46Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:27:46Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:27:46Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:27:46Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:27:46Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:27:46Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:27:46Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:27:46Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:27:46Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:27:46Z" level=error msg="field not found, node: entrypoint" container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400 providerName=docker
+time="2023-02-13T07:27:46Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:27:46Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:46Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:27:46Z" level=debug msg="Creating middleware" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:27:46Z" level=debug msg="Setting up redirection to https 443" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:27:46Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:46Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:27:47Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:27:47Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:27:47Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:47Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:27:47Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:27:47Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery entryPointName=web middlewareType=Recovery
+time="2023-02-13T07:27:47Z" level=debug msg="Creating middleware" serviceName=tui-web-k3s middlewareType=Pipelining middlewareName=pipelining entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:27:47Z" level=debug msg="Creating load-balancer" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s
+time="2023-02-13T07:27:47Z" level=debug msg="Creating server 0 http://172.19.0.2:80" serverName=0 serviceName=tui-web-k3s entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:27:47Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:27:47Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:27:47Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" routerName=tui-web@docker middlewareName=tracing middlewareType=TracingForwarder entryPointName=websecure
+time="2023-02-13T07:27:47Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=websecure middlewareName=traefik-internal-recovery
+time="2023-02-13T07:27:47Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:27:47Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker
+time="2023-02-13T07:27:47Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:27:47Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:27:47Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme routerName=tui-web@docker
+time="2023-02-13T07:27:47Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:27:47Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:27:47Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:27:47Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:27:47Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" providerName=letsencrypt.acme routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:27:54Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:54Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51388: remote error: tls: unknown certificate"
+time="2023-02-13T07:27:54Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:54Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51390: remote error: tls: unknown certificate"
+time="2023-02-13T07:27:59Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:59Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51400: remote error: tls: unknown certificate"
+time="2023-02-13T07:27:59Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:59Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51414: remote error: tls: unknown certificate"
+time="2023-02-13T07:27:59Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:27:59Z" level=debug msg="http: TLS handshake error from 172.19.0.1:51426: remote error: tls: unknown certificate"
+time="2023-02-13T07:27:59Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:24Z" level=info msg="I have to go..."
+time="2023-02-13T07:29:24Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:29:24Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:29:24Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:29:24Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:29:24Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:29:24Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:29:24Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:29:24Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:29:24Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:29:24Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:29:24Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:29:24Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:29:24Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:29:24Z" level=info msg="Server stopped"
+time="2023-02-13T07:29:24Z" level=info msg="Shutting down"
+time="2023-02-13T07:29:27Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:29:27Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:29:27Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:29:27Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:29:27Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:29:27Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:29:27Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:29:27Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:29:27Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:29:27Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:29:27Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:29:27Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:29:27Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=info msg="Testing certificate renew..." ACME CA="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:29:27Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:29:27Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:29:27Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:29:27Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:29:27Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:29:27Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:29:27Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:29:27Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:29:27Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web
+time="2023-02-13T07:29:27Z" level=debug msg="Setting up redirection to https 443" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:29:27Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:29:27Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:29:27Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:29:27Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:29:27Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s middlewareName=pipelining middlewareType=Pipelining
+time="2023-02-13T07:29:27Z" level=debug msg="Creating load-balancer" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s
+time="2023-02-13T07:29:27Z" level=debug msg="Creating server 0 http://172.19.0.2:80" serviceName=tui-web-k3s serverName=0 entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:29:27Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:29:27Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:29:27Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" middlewareName=tracing middlewareType=TracingForwarder entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:29:27Z" level=debug msg="Creating middleware" entryPointName=websecure middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:29:27Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:29:27Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:29:27Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:29:27Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:29:27Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:29:27Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:29:28Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:29:34Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:34Z" level=debug msg="http: TLS handshake error from 172.19.0.1:41890: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:34Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:34Z" level=debug msg="http: TLS handshake error from 172.19.0.1:41892: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:39Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:39Z" level=debug msg="http: TLS handshake error from 172.19.0.1:41906: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:39Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:39Z" level=debug msg="http: TLS handshake error from 172.19.0.1:41914: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:39Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:53Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:53Z" level=debug msg="http: TLS handshake error from 172.19.0.1:45684: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:53Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:53Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:29:53Z" level=debug msg="http: TLS handshake error from 172.19.0.1:45694: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:53Z" level=debug msg="http: TLS handshake error from 172.19.0.1:45708: remote error: tls: unknown certificate"
+time="2023-02-13T07:29:53Z" level=debug msg="Serving default certificate for request: \"host.docker.internal\""
+time="2023-02-13T07:30:33Z" level=info msg="I have to go..."
+time="2023-02-13T07:30:33Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:30:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:30:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:30:33Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:30:33Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:30:33Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:30:33Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:30:33Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:30:33Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:30:33Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:30:33Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:30:33Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:30:33Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:30:33Z" level=info msg="Server stopped"
+time="2023-02-13T07:30:33Z" level=info msg="Shutting down"
+time="2023-02-13T07:30:55Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:30:55Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:30:55Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:30:55Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:30:55Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:30:55Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:30:55Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:30:55Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:30:55Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:30:55Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:30:55Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:30:55Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:30:55Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:30:55Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:30:55Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:30:55Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:30:55Z" level=info msg="Testing certificate renew..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:30:55Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:30:55Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:30:55Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:30:55Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:30:55Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:30:55Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:30:55Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareType=TracingForwarder middlewareName=tracing
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:30:55Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:30:55Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=web
+time="2023-02-13T07:30:55Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:30:55Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=web routerName=web-to-websecure@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:30:55Z" level=debug msg="Setting up redirection to https 443" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:30:55Z" level=debug msg="Adding tracing to middleware" entryPointName=web middlewareName=redirect-web-to-websecure@internal routerName=web-to-websecure@internal
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" middlewareName=pipelining middlewareType=Pipelining routerName=tui-web@docker serviceName=tui-web-k3s entryPointName=websecure
+time="2023-02-13T07:30:55Z" level=debug msg="Creating load-balancer" routerName=tui-web@docker serviceName=tui-web-k3s entryPointName=websecure
+time="2023-02-13T07:30:55Z" level=debug msg="Creating server 0 http://172.19.0.2:80" serverName=0 serviceName=tui-web-k3s entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:30:55Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:30:55Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:30:55Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" middlewareType=TracingForwarder middlewareName=tracing entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:30:55Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=websecure
+time="2023-02-13T07:30:55Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:30:55Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:30:55Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:30:55Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:30:55Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:30:55Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:30:55Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:30:55Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:30:55Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:30:56Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:31:53Z" level=info msg="I have to go..."
+time="2023-02-13T07:31:53Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:31:53Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:31:53Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:31:53Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:31:53Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:31:53Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:31:53Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:31:53Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:31:53Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:31:53Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:31:53Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:31:53Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:31:53Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:31:53Z" level=info msg="Server stopped"
+time="2023-02-13T07:31:53Z" level=info msg="Shutting down"
+time="2023-02-13T07:31:56Z" level=info msg="Traefik version 2.9.6 built on 2022-12-07T14:17:58Z"
+time="2023-02-13T07:31:56Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"console\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"websecure\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"websecure\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"common\"},\"certificatesResolvers\":{\"letsencrypt\":{\"acme\":{\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{}}}}}"
+time="2023-02-13T07:31:56Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-02-13T07:31:56Z" level=debug msg="Starting TCP Server" entryPointName=console
+time="2023-02-13T07:31:56Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2023-02-13T07:31:56Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2023-02-13T07:31:56Z" level=info msg="Starting provider *traefik.Provider"
+time="2023-02-13T07:31:56Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2023-02-13T07:31:56Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2023-02-13T07:31:56Z" level=debug msg="Starting TCP Server" entryPointName=websecure
+time="2023-02-13T07:31:56Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2023-02-13T07:31:56Z" level=info msg="Starting provider *docker.Provider"
+time="2023-02-13T07:31:56Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-02-13T07:31:56Z" level=info msg="Starting provider *acme.Provider"
+time="2023-02-13T07:31:56Z" level=debug msg="*acme.Provider provider configuration: {\"email\":\"drakon660@email.com\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"acme/acme.json\",\"keyType\":\"RSA4096\",\"certificatesDuration\":2160,\"tlsChallenge\":{},\"ResolverName\":\"letsencrypt\",\"store\":{},\"TLSChallengeProvider\":{},\"HTTPChallengeProvider\":{}}"
+time="2023-02-13T07:31:56Z" level=debug msg="Attempt to renew certificates \"720h0m0s\" before expiry and check every \"24h0m0s\"" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:31:56Z" level=info msg="Testing certificate renew..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:31:56Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"web-to-websecure\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"redirect-web-to-websecure\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"redirect-web-to-websecure\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2023-02-13T07:31:56Z" level=debug msg="Configuration received: {\"http\":{},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=letsencrypt.acme
+time="2023-02-13T07:31:56Z" level=debug msg="Provider connection established with docker 20.10.22 (API 1.41)" providerName=docker
+time="2023-02-13T07:31:56Z" level=error msg="field not found, node: entrypoint" providerName=docker container=traefik-k3s-56f77be2488622b295b35a9ae52c9cd1a7496d3546cf3318a9260b9b06420400
+time="2023-02-13T07:31:56Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"tui-web\":{\"entryPoints\":[\"websecure\"],\"service\":\"tui-web-k3s\",\"rule\":\"Host(`host.docker.internal`) \\u0026\\u0026 Path(`/tui-web`)\",\"tls\":{\"certResolver\":\"letsencrypt\"}}},\"services\":{\"tui-web-k3s\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-02-13T07:31:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:31:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:31:56Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:31:56Z" level=debug msg="Adding tracing to middleware" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:31:56Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2023-02-13T07:31:56Z" level=debug msg="Added outgoing tracing middleware noop@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=web routerName=web-to-websecure@internal
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme routerName=web-to-websecure@internal entryPointName=web
+time="2023-02-13T07:31:56Z" level=debug msg="Setting up redirection to https 443" routerName=web-to-websecure@internal entryPointName=web middlewareName=redirect-web-to-websecure@internal middlewareType=RedirectScheme
+time="2023-02-13T07:31:56Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=web-to-websecure@internal middlewareName=redirect-web-to-websecure@internal
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" serviceName=tui-web-k3s middlewareType=Pipelining middlewareName=pipelining entryPointName=websecure routerName=tui-web@docker
+time="2023-02-13T07:31:56Z" level=debug msg="Creating load-balancer" entryPointName=websecure routerName=tui-web@docker serviceName=tui-web-k3s
+time="2023-02-13T07:31:56Z" level=debug msg="Creating server 0 http://172.19.0.2:80" routerName=tui-web@docker serviceName=tui-web-k3s serverName=0 entryPointName=websecure
+time="2023-02-13T07:31:56Z" level=debug msg="child http://172.19.0.2:80 now UP"
+time="2023-02-13T07:31:56Z" level=debug msg="Propagating new UP status"
+time="2023-02-13T07:31:56Z" level=debug msg="Added outgoing tracing middleware tui-web-k3s" middlewareType=TracingForwarder entryPointName=websecure routerName=tui-web@docker middlewareName=tracing
+time="2023-02-13T07:31:56Z" level=debug msg="Creating middleware" entryPointName=websecure middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-02-13T07:31:56Z" level=debug msg="Adding route for host.docker.internal with TLS options default" entryPointName=websecure
+time="2023-02-13T07:31:56Z" level=debug msg="Trying to challenge certificate for domain [host.docker.internal] found in HostSNI rule" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory"
+time="2023-02-13T07:31:56Z" level=debug msg="Looking for provided certificate(s) to validate [\"host.docker.internal\"]..." rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker
+time="2023-02-13T07:31:56Z" level=debug msg="Domains [\"host.docker.internal\"] need ACME certificates generation for domains \"host.docker.internal\"." ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:31:56Z" level=debug msg="Loading ACME certificates [host.docker.internal]..." providerName=letsencrypt.acme ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)"
+time="2023-02-13T07:31:56Z" level=debug msg="Building ACME client..." providerName=letsencrypt.acme
+time="2023-02-13T07:31:56Z" level=debug msg="https://acme-v02.api.letsencrypt.org/directory" providerName=letsencrypt.acme
+time="2023-02-13T07:31:57Z" level=debug msg="Using TLS Challenge provider." providerName=letsencrypt.acme
+time="2023-02-13T07:31:57Z" level=debug msg="legolog: [INFO] [host.docker.internal] acme: Obtaining bundled SAN certificate"
+time="2023-02-13T07:31:57Z" level=error msg="Unable to obtain ACME certificate for domains \"host.docker.internal\": unable to generate a certificate for the domains [host.docker.internal]: acme: error: 400 :: POST :: https://acme-v02.api.letsencrypt.org/acme/new-order :: urn:ietf:params:acme:error:rejectedIdentifier :: Error creating new order :: Cannot issue for \"host.docker.internal\": Domain name does not end with a valid public suffix (TLD)" ACME CA="https://acme-v02.api.letsencrypt.org/directory" routerName=tui-web@docker rule="Host(`host.docker.internal`) && Path(`/tui-web`)" providerName=letsencrypt.acme
+time="2023-02-13T07:32:25Z" level=debug msg="Serving default certificate for request: \"localhost\""
+time="2023-02-13T07:32:25Z" level=debug msg="http: TLS handshake error from 172.19.0.1:57098: remote error: tls: unknown certificate"
+time="2023-02-13T07:33:18Z" level=info msg="I have to go..."
+time="2023-02-13T07:33:18Z" level=info msg="Stopping server gracefully"
+time="2023-02-13T07:33:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=console
+time="2023-02-13T07:33:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=web
+time="2023-02-13T07:33:18Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=websecure
+time="2023-02-13T07:33:18Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:33:18Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:33:18Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=web
+time="2023-02-13T07:33:18Z" level=debug msg="Entry point web closed" entryPointName=web
+time="2023-02-13T07:33:18Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=console
+time="2023-02-13T07:33:18Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:33:18Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+time="2023-02-13T07:33:18Z" level=debug msg="Entry point websecure closed" entryPointName=websecure
+time="2023-02-13T07:33:18Z" level=debug msg="Entry point console closed" entryPointName=console
+time="2023-02-13T07:33:18Z" level=info msg="Server stopped"
+time="2023-02-13T07:33:18Z" level=info msg="Shutting down"
