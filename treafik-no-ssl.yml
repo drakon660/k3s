@@ -19,7 +19,7 @@ services:
 
   showcase:
     restart: always
-    image: tui-web:1.4
+    image: cloud.canister.io:5000/drakon/tui-web:1.4
     container_name: tui-web
     ports:
       - 8081:80
