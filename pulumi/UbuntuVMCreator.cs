@@ -5,9 +5,9 @@ namespace k3s_azure;
 using System.Collections.Generic;
 using Pulumi;
 using AzureNative = Pulumi.AzureNative;
-public static class WindowsVMCreator
+public static class UbuntuVMCreator
 {
-    public static void Add(string location, string resourceGroupName, string virtualNetworkName, string subnetName, string networkInterfaceName)
+    public static void Create(string location, string resourceGroupName, string virtualNetworkName, string subnetName, string networkInterfaceName)
     {
         var publicIp = new AzureNative.Network.PublicIPAddress("public-ip", new AzureNative.Network.PublicIPAddressArgs
         {

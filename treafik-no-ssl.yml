@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  reverse-proxy:
+  traefik:
     image: traefik:latest
     command:
       - "--log.level=DEBUG"
@@ -16,10 +16,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=false 
+      - traefik.http.routers.traefik_https.rule=Host(`host.docker.internal`)
 
-  showcase:
-    restart: always
-    image: cloud.canister.io:5000/drakon/tui-web:1.4
+  showcase:    
+    image: tui-web:4.0
     container_name: tui-web
     ports:
       - 8081:80
@@ -28,7 +28,19 @@ services:
       - ASPNETCORE_URLS=http://+:8081
     labels:
      - traefik.enable=true
-     - traefik.http.routers.showcase.rule=Host(`tui.localhost`)
+     - traefik.http.routers.showcase.rule=Host(`localhost`) && (PathPrefix(`//whoami/`) || PathPrefix(`/portainer`))
      - traefik.http.routers.showcase.entrypoints=web 
      - traefik.http.services.showcase.loadbalancer.server.port=8081   
+     #- traefik.http.middlewares.showcase.stripprefix.prefixes=/web1
+     - "traefik.http.middlewares.showcase.stripprefix.prefixes=/whoami" 
+     - "traefik.http.middlewares.showcase.stripprefix.forceslash=true"   
+     - "traefik.http.routers.app.middlewares=showcase"      
     restart: unless-stopped
+
+  whoami2:
+    image: "nginxdemos/hello"
+    scale: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami2.rule=Host(`localhost`) && Path(`/whoami2`)"
+      - "traefik.http.routers.whoami2.entrypoints=web"
