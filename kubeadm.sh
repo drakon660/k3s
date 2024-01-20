@@ -10,4 +10,4 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-sudo mkdir -m 755 /etc/apt/keyrings
+#sudo mkdir -m 755 /etc/apt/keyrings
